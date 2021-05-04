@@ -12,8 +12,8 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
 const s3 = new AWS.S3({
-  accessKeyId: require("../../config/keys").awsAccessKeyId,
-  secretAccessKey: require("../../config/keys").awsSecretAccessKey,
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
 });
 
 router.get("/download", async (req, res) => {

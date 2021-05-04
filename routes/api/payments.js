@@ -28,7 +28,7 @@ router.post("/charge", async (req, res) => {
       }},
     ]);
     totalAmount = totalAmount[0].total;
-    const stripe = require('stripe')(require("../../config/keys").STRIPE_SECRET_KEY);
+    const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
     stripe.customers.list({email: userEmail})
     .then(async(customers) => {
       if (customers.data.length > 0) {
