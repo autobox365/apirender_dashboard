@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "bb4ac2f36c5d8efd73448d0dd8e9c88b",
+    "revision": "d4c48039d0b9cf0afa25d4b3de9c203c",
     "url": "/index.html"
   },
   {
@@ -132,12 +132,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/js/App.071fb9b6.chunk.js"
   },
   {
-    "revision": "29dd875dd3dba081ccbd",
-    "url": "/static/js/add-briefing.fa9a92c7.chunk.js"
+    "revision": "fe9abe366e7ef0db79c3",
+    "url": "/static/js/add-briefing.658c5c0b.chunk.js"
   },
   {
-    "revision": "33d5cfbdb6a8bb354c14",
-    "url": "/static/js/briefing-details.c25cf7d6.chunk.js"
+    "revision": "cc81c8e95cd0b27d4a3b",
+    "url": "/static/js/briefing-details.10423edd.chunk.js"
   },
   {
     "revision": "a4e9154086cf2245297f",
@@ -172,8 +172,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/js/projects.751411f5.chunk.js"
   },
   {
-    "revision": "b041022a7e15eb3d5002",
-    "url": "/static/js/runtime-main.3cdc5019.js"
+    "revision": "a36d23a702f21f56495d",
+    "url": "/static/js/runtime-main.a11f97c3.js"
   },
   {
     "revision": "c72d96b39c509aa59934",
