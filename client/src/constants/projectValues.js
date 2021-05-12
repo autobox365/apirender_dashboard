@@ -10,13 +10,13 @@ export const projectCategories = [
   },
   {
     id: 2,
-    desc: "Real Estate Marketing",
+    desc: "Listing Enhancement",
     value: "REAL_ESTATE_MARKETING",
     img: "/assets/img/category/real_estate.png",
   },
   {
     id: 3,
-    desc: "Property Development Projects",
+    desc: "Porject Marketing",
     value: "PROPERTY_DEVELOPMENT",
     img: "/assets/img/category/property_development.png",
   },
@@ -252,7 +252,7 @@ export const services = {
     },
     {
       id: 8,
-      name: "Budget 3D Renders",
+      name: "Express 3D Renders",
       desc:
         "The ideal render for low budget project marketing or council approvals",
       img: "/assets/img/services/property_development/Budget_Exterior_Render.png",
@@ -710,10 +710,6 @@ export const options = {
       value: "RE_REAL_ESTATE_PHOTO_RETOUCHING_ITEM_REMOVAL",
       desc:
         "Digital removal of small and large clutter within your image. Price is per image.",
-      example_images: [
-        "/assets/img/services/example/3A.jpg",
-        "/assets/img/services/example/3C.jpg",
-      ],
       items: [
         {
           price: 5.0,
@@ -721,8 +717,8 @@ export const options = {
           desc: "Remove 1-3 Small Items",
           value: "RE_REAL_ESTATE_PHOTO_RETOUCHING_ITEM_REMOVAL_SMALL_ITEMS",
           example_images: [
-            "/assets/img/services/example/large_item_removal_before.jpg",
-            "/assets/img/services/example/large_item_removal_after.jpg",
+            "/assets/img/services/example/DSC_2117_before.jpg",
+            "/assets/img/services/example/DSC_2117_after.jpg",
           ],
         },
         {
@@ -1085,8 +1081,8 @@ export const options = {
           desc: "Remove 1-3 Small Items",
           value: "RE_MOTION_PICTURE_ITEM_REMOVAL_SMALL_ITEMS",
           example_images: [
-            "/assets/img/services/example/large_item_removal_before.jpg",
-            "/assets/img/services/example/large_item_removal_after.jpg",
+            "/assets/img/services/example/DSC_2117_before.jpg",
+            "/assets/img/services/example/DSC_2117_after.jpg",
           ],
         },
         {
@@ -1114,7 +1110,7 @@ export const options = {
   ],
   RE_VIDEO: [
     {
-      name: "Select video length and quanitty below.",
+      name: "Select video length and quantity below.",
       items: [
         {
           name: "Video 30 sec",

@@ -11,7 +11,7 @@ const dropzoneComponentConfig = {
 const dropzoneConfig = {
   thumbnailHeight: 160,
   maxFilesize: 50,
-  maxFiles: 20,
+  maxFiles: 50,
   parallelUploads: 5,
   autoProcessQueue: false,
   params: {

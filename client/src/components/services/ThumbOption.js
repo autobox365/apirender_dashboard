@@ -66,6 +66,7 @@ const ThumbSelection = ({ subOption, parentOption, addedItems, addSubOption }) =
             </NavLink>
         </div>
         <CardBody className="text-center" style={{padding: '0.5rem'}}>
+          <label className="">Select number of floors</label>
           <div className="d-flex items-center justify-content-center">
             <div className="option-quantity-input mb-1">                
                 <Button color="primary" className="default" onClick={() => decrement()} >

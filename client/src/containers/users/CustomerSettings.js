@@ -42,7 +42,6 @@ const CustomerSettings = ({ history, user, receiveAuthUserAction }) => {
     formData.append("last_name", values.lastName);
     formData.append("phone_number", values.phoneNumber);
     formData.append("email", values.email);
-    formData.append("email_preference", values.emailPreference);
     formData.append("job_title", values.jobTitle);
     formData.append("company_name", values.companyName);
     formData.append("country", values.country);
@@ -108,9 +107,6 @@ const CustomerSettings = ({ history, user, receiveAuthUserAction }) => {
                   email: Yup.string()
                     .email("Email is invalid")
                     .required("Email is required"),
-                  emailPreference: Yup.string()
-                    .email("Email Preference is invalid")
-                    .required("Email Preference is required"),
                   country: Yup.string().required("Address is required"),
                   phoneNumber: Yup.string().matches(
                     phoneRegExp,
@@ -127,7 +123,7 @@ const CustomerSettings = ({ history, user, receiveAuthUserAction }) => {
                             <AvatarUploader
                               label="Upload Profile Pircutre or Company Logo"
                               handleChange={(data) => setAvatar(data)}
-                              orgData={user.avatar}
+                              orgData={user.avatar ? user.avatar : '/assets/img/profile_pic.png'}
                             />
                           </div>
                         </FormGroup>
@@ -199,24 +195,6 @@ const CustomerSettings = ({ history, user, receiveAuthUserAction }) => {
                       <Colxx sm={6}>
                         <FormGroup className="form-group has-float-label  mb-4">
                           <Label>
-                            <IntlMessages id="user.email_preference" />
-                          </Label>
-                          <Field
-                            className="form-control"
-                            name="emailPreference"
-                          />
-                          {errors.emailPreference &&
-                            touched.emailPreference && (
-                              <div className="invalid-feedback d-block">
-                                {errors.emailPreference}
-                              </div>
-                            )}
-                        </FormGroup>
-                      </Colxx>
-
-                      <Colxx sm={6}>
-                        <FormGroup className="form-group has-float-label  mb-4">
-                          <Label>
                             <IntlMessages
                               id="user.companyname"
                             />
@@ -252,7 +230,7 @@ const CustomerSettings = ({ history, user, receiveAuthUserAction }) => {
                           )}
                         </FormGroup>
                       </Colxx>
-                      <Colxx sm={12}>
+                      <Colxx sm={6}>
                         <FormGroup className="form-group has-float-label  mb-4">
                           <Label>
                             <IntlMessages

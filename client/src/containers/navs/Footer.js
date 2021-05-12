@@ -24,11 +24,6 @@ const Footer = () => {
                     Terms & Conditions
                   </NavLink>
                 </li>
-                <li className="breadcrumb-item mb-0">
-                  <NavLink className="btn-link" to={{}}>
-                    Support
-                  </NavLink>
-                </li>
               </ul>
             </Colxx>
           </Row>

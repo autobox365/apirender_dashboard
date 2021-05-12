@@ -161,8 +161,8 @@ const PDInteriorRenders = ({ service, orders, history }) => {
                                 type="radio"
                                 id={`residentialDesignStyle1_${index}`}
                                 name={`residentialDesignStyle${index}`}
-                                label="I'm Note Sure"
-                                value="I'm Note Sure"
+                                label="I'm Not Sure"
+                                value="I'm Not Sure"
                                 onChange={handleChange}
                               />
                             </div>

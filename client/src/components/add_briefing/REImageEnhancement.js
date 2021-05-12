@@ -87,7 +87,7 @@ const REImageEnhancement = ({ service, orders, history }) => {
         <Colxx md="12">
           <Card className="mb-4">
             <CardBody>
-              <h5 className="text-primary mb-5">Image Enhancement</h5>
+              <h5 className="text-primary mb-5">360 Image Enhancement</h5>
               <Form onSubmit={handleSubmit}>
                 <FormGroup>
                   <Label className="font-weight-bold">

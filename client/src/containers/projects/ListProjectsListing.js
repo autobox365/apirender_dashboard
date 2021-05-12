@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { Row, Table, Badge, Button } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
 import { Colxx } from '../../components/common/CustomBootstrap';
@@ -14,6 +15,7 @@ const ListProjectsListing = ({
   onChangePage,
   deleteProject
 }) => {
+  const history = useHistory();
   return (
     <Row>
       <Colxx xxs="12" className="mb-3">
@@ -31,7 +33,7 @@ const ListProjectsListing = ({
           <tbody>
             {items.map((project, k_index) => {
               return (
-                <tr role="row" key={k_index} className="p-5">
+                <tr role="row" key={k_index} className="p-5" style={{cursor: 'pointer'}}onClick={(e) => history.push(`/app/projects/details/${project._id}`)}>
                   <td role="cell" className="p-4 list-item-heading w-20">
                     <NavLink to={`/app/projects/details/${project._id}`} className="w-sm-100">
                       <p className="mb-1 truncate">
