@@ -39,6 +39,7 @@ const deliveryOptions = [
 const OrderSummary = ({ setDeliveryOption, services, project, handleUpdateService, changeDeliveryAddr }) => {
   const [orders, setOrders] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [deliveryOption, updateDeliveryOption] = useState(null);
 
   useEffect(() => {
     let newOrders = [];
@@ -90,6 +91,7 @@ const OrderSummary = ({ setDeliveryOption, services, project, handleUpdateServic
 
   const handleChangeRadio = (e, price) => {
     setDeliveryOption(e.target.value, price);
+    updateDeliveryOption({ option: e.target.value, price: price });
   };
 
   const handleAddressChange = (e) => {
@@ -204,18 +206,6 @@ const OrderSummary = ({ setDeliveryOption, services, project, handleUpdateServic
                 })}
               </tbody>
             </Table>
-          </div>
-          <div className="d-flex flex-column">
-            <div className="border-bottom pt-3 mb-5" />
-            <Table borderless className="d-flex justify-content-end">
-              <tbody>
-                <tr className="font-weight-bold">
-                  <td className="text-semi-muted">Total :</td>
-                  <td className="text-right">AU$ {totalPrice.toFixed(2)}</td>
-                </tr>
-              </tbody>
-            </Table>
-            <div className="border-bottom pt-3 mb-5" />
           </div>
           {
             project.category === "PRINTING_SERVICES" && (
@@ -359,6 +349,18 @@ const OrderSummary = ({ setDeliveryOption, services, project, handleUpdateServic
               </>
             )
           }
+          <div className="d-flex flex-column">
+            <div className="border-bottom pt-3 mb-5" />
+            <Table borderless className="d-flex justify-content-end">
+              <tbody>
+                <tr className="font-weight-bold">
+                  <td className="text-semi-muted">Total :</td>
+                  <td className="text-right">AU$ {(totalPrice + (deliveryOption && deliveryOption.price ? deliveryOption.price : 0)).toFixed(2)}</td>
+                </tr>
+              </tbody>
+            </Table>
+            <div className="border-bottom pt-3 mb-5" />
+          </div>
           <p>
             <NavLink
               exact={true}

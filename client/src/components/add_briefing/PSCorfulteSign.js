@@ -87,7 +87,7 @@ const PSCorfulteSign = ({ service, orders, history, project }) => {
                     <IntlMessages id="briefing.file-upload" />
                   </Label>
                   <p className="text-muted text-small">
-                  Upload your print-ready file here. Refer to the Product Specs and Design Guide for instructions on creating your file.
+                  Upload your print-ready file here. Refer to the File Prepartion Guide for instructions on creating your file.
                   </p>
                   <FileDropzone ref={dropzone} />
                 </FormGroup>

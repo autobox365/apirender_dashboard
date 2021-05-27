@@ -446,7 +446,7 @@ const PD3DRendersStreetscape = ({ service, orders, history }) => {
                   )}
                 </FormGroup>
                 <FormGroup>
-                  <Label className="font-weight-bold">Woud you like vechicles to appear in the render?</Label>
+                  <Label className="font-weight-bold">Woud you like vehicles to appear in the render?</Label>
                   <div>
                     <CustomInput
                       type="radio"

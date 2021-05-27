@@ -10,6 +10,7 @@ import {
   Form,
   Input,
   CardBody,
+  CardTitle
 } from "reactstrap";
 import { Colxx, Separator } from "../../../components/common/CustomBootstrap";
 import IntlMessages from "../../../helpers/IntlMessages";
@@ -111,24 +112,38 @@ const BriefingDetails = ({ intl, match, history }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     setBtnLoading(true);
-    dropzone.current.myDropzone.processQueue();
-  }
 
-  const queueComplete = (data) => {
+    const files = dropzone.current.myDropzone.files;
+    const uploadFormData = new FormData();
+    const config = {
+      headers: {
+        'content-type': 'multipart/form-data'
+      }
+    };
+
+    for (let i = 0 ; i < files.length ; i ++) {
+      uploadFormData.append("backup_files", files[i]);
+    }
+
     const content = isBackup ? notes : '';
+
+    uploadFormData.append("serviceId", service._id);
+    uploadFormData.append("notes", content);
+    uploadFormData.append("category", service.value);
+    uploadFormData.append("option", "backup_files");
+
     axios
-      .post(
-        `/api/backup/save?service_id=${service._id}`
-      , { notes: content })
+      .post(`/api/briefing/save-backup`, uploadFormData, config)
       .then((res) => {
-        return res.data;
-      })
-      .then((data) => {
         if (isBackup)
           setIsBackup(false);
         setBtnLoading(false);
-        setDownloads(data.downloads);
+        setDownloads(res.data.downloads);
         setNotes('');
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+        setBtnLoading(false);
       });
   }
 
@@ -157,8 +172,6 @@ const BriefingDetails = ({ intl, match, history }) => {
                       </Label>
                       <FileDropzone 
                         ref={dropzone}
-                        postUrl={`/api/briefing/upload?service_id=${service._id}&category=${service.value}&option=backup_files`}
-                        queueComplete={queueComplete}
                         meta="dropzone"
                       />
                     </Colxx>
@@ -638,7 +651,50 @@ const BriefingDetails = ({ intl, match, history }) => {
           backupNotes={backupNotes}
         />
       )}
-      
+      {
+        project && project.delivery_address && (
+          <Row className="chat-row">
+            <Colxx xxs="12">
+              <h5 className="mb-4">Delivery Address</h5>
+              <Card>
+                <CardBody>
+                  <FormGroup row>
+                    <Colxx sm="6">
+                      <Label className="mr-2 text-primary">Street Name: </Label>
+                      <span>{project.delivery_address.streetName}</span>
+                    </Colxx>
+                    <Colxx sm="6">
+                      <Label className="mr-2 text-primary">Street Number: </Label>
+                      <span>{project.delivery_address.streetNumber}</span>
+                    </Colxx>
+                  </FormGroup>
+                  <FormGroup row>
+                    <Colxx sm="6">
+                      <Label className="mr-2 text-primary">Unit Number: </Label>
+                      <span>{project.delivery_address.unitNumber}</span>
+                    </Colxx>
+                    <Colxx sm="6">
+                      <Label className="mr-2 text-primary">Suburb: </Label>
+                      <span>{project.delivery_address.suburb}</span>
+                    </Colxx>
+                  </FormGroup>
+                  <FormGroup row>
+                    <Colxx sm="6">
+                      <Label className="mr-2 text-primary">Zip Code: </Label>
+                      <span>{project.delivery_address.zipCode}</span>
+                    </Colxx>
+                    <Colxx sm="6">
+                      <Label className="mr-2 text-primary">Country: </Label>
+                      <span>{project.delivery_address.country}</span>
+                    </Colxx>
+                  </FormGroup>
+                </CardBody>
+              </Card>
+            </Colxx>
+          </Row>
+          
+        )
+      }
       {
         customer != null && (
           <ChatApplicationMenu history={history} match={match} intl={intl} customer={customer}/>

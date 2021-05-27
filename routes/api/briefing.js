@@ -159,4 +159,91 @@ router.post("/confirm-service", async (req, res) => {
   
 });
 
+router.post("/save-backup", async (req, res) => {
+  
+  const form = new formidable.IncomingForm();
+  let reqBody = null;
+  let files = [];
+  form.parse(req, function (err, fields, files) {
+    reqBody = fields;
+  });
+  
+  form.on("fileBegin", async (name, file) => {
+    file.path = __dirname + '/../../uploads/temp/' + file.name;
+    files.push({
+      name: name,
+      file_name: file.name,
+      size: file.size,
+      path: __dirname + '/../../uploads/temp/' + file.name
+    });
+  });
+
+  form.on("file", function (name, file) {
+
+  });
+
+  form.on("end", async () => {
+    let reqData = [];
+    for (let i = 0 ; i < files.length ; i ++) {
+      const fileContent = fs.readFileSync(files[i].path);
+      const fileSize = fs.statSync(files[i].path).size;
+      const rawBytes = await crypto.pseudoRandomBytes(16);
+      const fileName = rawBytes.toString('hex') + Date.now() + path.extname(files[i].name);
+      reqData.push({
+        service_option: files[i].name,
+        original_name: files[i].file_name,
+        key_name: fileName,
+        file_size: fileSize,
+        extension: path.extname(files[i].name),
+        param: {
+          Bucket: 'apirender-dashboard-bucket-2020-sep',
+          Key: fileName,
+          Body: fileContent
+        }
+      });
+      fs.unlinkSync(files[i].path);
+    }
+
+    let { serviceId, notes } = reqBody;
+
+    const s3Responses = await Promise.all(
+      reqData.map(async data => {
+        return {
+          service_option: data.service_option,
+          original_name: data.original_name,
+          key_name: data.key_name,
+          file_size: data.file_size,
+          extension: data.extension,
+          data: await s3.upload(data.param).promise()
+        }
+      })
+    );
+    
+    for (let i = 0 ; i < s3Responses.length; i ++) {
+      const newFile = new File({
+        service_id: serviceId,
+        service_option: s3Responses[i].service_option,
+        original_name: s3Responses[i].original_name,
+        key_name: s3Responses[i].key_name,
+        path: s3Responses[i].data.Location,
+        file_size: s3Responses[i].file_size,
+        extension: s3Responses[i].extension
+      });
+      await newFile.save();
+    }
+
+    try {
+      const newBackup = new Backup({ service_id: serviceId, notes });
+      await newBackup.save();
+
+      const files = await File.find({service_id: serviceId});
+
+      return res.status(200).json({downloads: files});
+    } catch (err) {
+      console.log(err)
+      return res.status(400).json(err)
+    }
+  });
+});
+
 module.exports = router;
